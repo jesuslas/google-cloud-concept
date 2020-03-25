@@ -1,0 +1,34 @@
+{
+  "name": "api_falabella-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "start:local": "nodemon index.js",
+    "lint": "eslint ./src/** ",
+    "lint:fix": "eslint ./src/** --fix"
+  },
+  "keywords": [],
+  "author": "Jalpino",
+  "license": "MIT",
+  "dependencies": {
+    "@google-cloud/language": "^3.8.0",
+    "@google-cloud/speech": "^3.6.0",
+    "@google-cloud/storage": "^4.6.0",
+    "@google-cloud/vision": "^1.11.0",
+    "body-parser": "^1.18.3",
+    "connect-multiparty": "^2.2.0",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.1.6",
+    "node-fetch": "^2.6.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "husky": "^4.2.3",
+    "prettier": "^1.19.1"
+  }
+}

@@ -1,0 +1,123 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #ffffff;
+  padding-top: 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 480px) {
+
+  .listMobile {
+    max-width: 414px;
+    overflow: scroll;
+  }
+  .labelMobile {
+    font-size: 14px !important;
+  }
+  .labelMobileAprox{
+    font-size: 9px !important;
+  }
+  
+  .tempMobile  {
+    font-size: 22px !important;
+  }
+  .tabButton {
+    width: 60px !important;
+  }
+  .MuiTab-root {
+    min-width: 65px !important;
+  }
+}
+
+.container {
+  background: #2b3642;
+  text-align: center;
+  padding: 40px;
+  margin-top: 50px;
+  border-radius: 10px;
+}
+.renderContainer{
+  width: 200px;
+  text-align: center;
+}
+
+form {
+  padding: 15px 0;
+  margin: 40px auto;
+  width: 70%;
+}
+
+button {
+  padding: 10px;
+  font-size: 14px;
+  background: #aad500;
+  color: black;
+  cursor: pointer;
+}
+
+input {
+  width: 70%;
+  padding: 10px 0 10px 15px;
+  font-size: 1em;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+button:hover {
+  background: #aad500;
+  border: none;
+}
+
+form input,
+form button {
+  display: inline-block;
+  border: none;
+}
+
+.MuiTab-textColorPrimary{
+  color:black !important;
+}
+.MuiTab-textColorPrimary.Mui-selected{
+  color:white !important;
+}
+
+.displayResults{
+  font-size: 14px;
+  text-align: left;
+}
+.displayImage{
+  max-width: 450px;
+}
