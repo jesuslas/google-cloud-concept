@@ -57,7 +57,7 @@ function FormImage() {
                 className="input"
               />
               <label htmlFor="inputFile">
-                {file ? file[0].name : "Selecciona Imagen"}
+                {file ? file[0].name : "Subir Archivo"}
               </label>
             </Grid>
             <Grid item xs={12}>

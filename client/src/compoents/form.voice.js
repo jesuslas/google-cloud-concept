@@ -45,9 +45,9 @@ function FormImage() {
             </Grid>
             <Grid item xs={12} className="buttonActions">
               <button type="submit" onClick={() => sendImage(file)}>
-                Send
+                Enviar
               </button>
-              <button onClick={() => clear()}>Clear</button>
+              <button onClick={() => clear()}>Borar</button>
             </Grid>
             <Grid item xs={12} className="text">
               {result.details && result.details}
