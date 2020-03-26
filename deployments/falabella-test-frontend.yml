@@ -1,0 +1,29 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: falabella-test-client
+  labels:
+    app: falabella-test
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: falabella-test
+        tier: client
+    spec:
+      containers:
+      - name: falabella-test
+        # Replace [GCLOUD_PROJECT] with your project ID or use `make template`.
+        image: gcr.io/falabella-test-272122/client:v1
+        # This setting makes nodes pull the docker image every time before
+        # starting the pod. This is useful when debugging, but should be turned
+        # off in production.
+        imagePullPolicy: Always
+        # The bookshelf process listens on port 8080 for web traffic by default.
+        ports:
+        - name: http-server
+          containerPort: 3000
+        env:
+          - name: falabella-test
+            value: falabella-test-272122

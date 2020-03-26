@@ -1,0 +1,15 @@
+FROM node:12.2.0
+
+COPY ./package*.json /api/
+
+WORKDIR /api
+
+RUN npm ci
+
+COPY . /api/
+
+RUN npm ci
+
+EXPOSE 4000
+
+CMD npm start

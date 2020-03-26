@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: falabella-test-api
+  labels:
+    app: falabella-test
+    tier: api
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: http-server
+  selector:
+    app: falabella-test
+    tier: api
