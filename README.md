@@ -1,6 +1,7 @@
 ## Clasificador de Imágenes y Audio
-1) Se debe seleccionar un problema a resolver. 
-   - los seleccione ambos 
+1) Una aplicación que carga una imagen, la envia al api y este retorna la información de la imagen. 
+1) Una aplicación que carga un audio, la envia al api y este retorna la información del audio. 
+   
 2) Compartir URL del servicio REST, debe funcionar. 
    - URL CLIENT
         - URL APP ENGINE API:  https://client-dot-falabella-test-272122.appspot.com/image
@@ -12,12 +13,12 @@
     ENDPOINTS del API    
     - Para todos los endpoint /* devuelve it works     
     - Endpoint /audio POST req.files:{files:filepathtemp}        
-        respons: { transcription, sentiment, entities }              
+        - respons: { transcription, sentiment, entities }              
             * transcription: texto transcrito del audio              
             * sentiment: Sentimiento global del text              
             * entities: entidades presentes en el texto   
     - Endpoint /image POST req.files:{files:filepathtemp}    
-        response: { objects, faces, detections: explicitContent }            
+        - response: { objects, faces, detections: explicitContent }           
             * objects: son los objetos en la imagen            
             * feces: un arreglo con las caracteristicas de cada cada que aparece en la imagen            
             * explicitiContent: { 
