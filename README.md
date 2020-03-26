@@ -53,6 +53,11 @@ npm i
 npm start
 
 
+### set json config file to autenticate local gcloud APIS
+set GOOGLE_APPLICATION_CREDENTIALS=[PATH]
+
+### autenticate gcloud 
+gcloud auth application-default login
 
 ### install SDK gcloud 
 https://cloud.google.com/sdk/install

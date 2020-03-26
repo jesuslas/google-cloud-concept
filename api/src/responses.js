@@ -18,6 +18,14 @@ const conflict = res => message =>
 const fail = res => error => sendResponse(res, 500, error);
 const notImplemented = res => (data = "") => sendResponse(res, 501, data);
 
+const response = res => async route => {
+  try {
+    const resp = await route();
+    ok(res)(resp);
+  } catch (error) {
+    fail(res)(error);
+  }
+};
 module.exports = {
   ok,
   created,
@@ -28,5 +36,6 @@ module.exports = {
   notFound,
   fail,
   unAuthorized,
-  notImplemented
+  notImplemented,
+  response
 };

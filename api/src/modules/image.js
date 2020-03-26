@@ -8,8 +8,7 @@ const {
 } = require("../service");
 
 class Image {
-  async getImageInfo(req, res) {
-    const file = req.files.files.tempFilePath;
+  async getImageInfo(file) {
     try {
       await getBuckets();
       const [result] = await getImageObjects(file);
@@ -35,10 +34,10 @@ class Image {
       explicitContent["spoof"] = translate(detections.spoof);
       explicitContent["violence"] = translate(detections.violence);
       explicitContent["racy"] = translate(detections.racy);
-      ok(res)({ objects, faces, detections: explicitContent });
+      return { objects, faces, detections: explicitContent };
     } catch (error) {
       console.log("error", error);
-      fail(res)(error);
+      throw error;
     }
   }
 }

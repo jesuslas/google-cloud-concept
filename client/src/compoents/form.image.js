@@ -77,7 +77,7 @@ function FormImage() {
           </Grid>
 
           <Grid item xs={12}>
-            {objects.length || faces.length ? (
+            {objects && (objects.length || faces.length) ? (
               <>
                 <div className="title"> 1) Análisis de Imagen</div>
                 <hr />

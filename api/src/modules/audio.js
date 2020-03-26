@@ -1,4 +1,3 @@
-const { ok, fail } = require("../responses");
 const {
   getAudioText,
   getBuckets,
@@ -7,21 +6,21 @@ const {
 } = require("../service");
 
 class Image {
-  async getAudioInfo(req, res) {
+  async getAudioInfo(file) {
     try {
       await getBuckets();
-      const [response] = await getAudioText(req.files.files.tempFilePath);
+      const [response] = await getAudioText(file);
       const transcription = response.results
         .map(result => result.alternatives[0].transcript)
         .join("\n");
-      const [result] = await getTextSentiment(transcription);
       const [analyzeEntities] = await getTextAnalyzeEntities(transcription);
+      const [result] = await getTextSentiment(transcription);
       const entities = analyzeEntities.entities;
       const sentiment = result.documentSentiment;
-      ok(res)({ transcription, sentiment, entities });
+      return { transcription, entities, sentiment };
     } catch (error) {
       console.log("error", error);
-      fail(res)(error);
+      throw error;
     }
   }
 }
