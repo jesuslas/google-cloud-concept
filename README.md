@@ -1,43 +1,67 @@
 ## Clasificador de Imágenes y Audio
-1) Una aplicación que carga una imagen, la envia al api y este retorna la información de la imagen. 
-1) Una aplicación que carga un audio, la envia al api y este retorna la información del audio. 
+- Se carga una imagen, la envia al api y este retorna la información de la imagen. 
+- Se carga un audio, la envia al api y este retorna la información del audio. 
    
-2) Compartir URL del servicio REST, debe funcionar. 
-   - URL CLIENT
-        - URL APP ENGINE API:  https://client-dot-falabella-test-272122.appspot.com/image
-        - URL Google Kubernetes Engine(GKE) API. : http://35.230.117.216/
-    - URL API
-        - URL APP ENGINE API: https://falabella-test-272122.appspot.com/ 
-        - URL Google Kubernetes Engine(GKE) API. : http://35.197.118.58/
+- Compartir URL del servicio REST, que funcionan. 
+- URL CLIENT
+    - URL APP ENGINE API:  https://client-dot-falabella-test-272122.appspot.com/image
+    - URL Google Kubernetes Engine(GKE) API. : http://35.230.117.216/
+- URL API
+    - URL APP ENGINE API: https://falabella-test-272122.appspot.com/ 
+    - URL Google Kubernetes Engine(GKE) API. : http://35.197.118.58/
 
-    ENDPOINTS del API    
-    - Para todos los endpoint /* devuelve it works     
-    - Endpoint /audio POST req.files:{files:filepathtemp}        
-        - respons: { transcription, sentiment, entities }              
-            * transcription: texto transcrito del audio              
-            * sentiment: Sentimiento global del text              
-            * entities: entidades presentes en el texto   
+ENDPOINTS del API    
+- Para todos los endpoint /* devuelve "it works"     
+- Endpoint /audio POST req.files:{files:filepathtemp}        
+    - respons: { transcription, sentiment, entities }              
+        * transcription: texto transcrito del audio              
+        * sentiment: Sentimiento global del text              
+        * entities: entidades presentes en el texto   
 
-    - Endpoint /image POST req.files: { files: filepathtemp }
-        - response: { objects, faces, detections: explicitContent }      
-            * objects: son los objetos en la imagen            
-            * feces: un arreglo con las caracteristicas de cada cada que aparece en la imagen            
-            * explicitiContent: { 
-                                explicitContent["adult"],    
-                                explicitContent["medical"],
-                                explicitContent["spoof"],
-                                explicitContent["violence"],
-                                explicitContent["racy"]
-                            }
+- Endpoint /image POST req.files: { files: filepathtemp }
+    - response: { objects, faces, detections: explicitContent }      
+        * objects: son los objetos en la imagen            
+        * feces: un arreglo con las caracteristicas de cada cada que aparece en la imagen            
+        * explicitiContent: { 
+                            explicitContent["adult"],    
+                            explicitContent["medical"],
+                            explicitContent["spoof"],
+                            explicitContent["violence"],
+                            explicitContent["racy"]
+                        }
 
-    - Suposiciones imagenes:
-        - Se requiere contabilizar la cantidad de personas que hay en una imagen
-        - Se requiere examinar si una imagen tiene contenido para adultos, violencia (entre otros) 
-        - Se requiere examinar cuales objectos hay en una imagen 
-    - Suposiciones audio:
-        - Se requiere transcribir un audio
-        - Se requiere examinar las entidades que hay en un texto 
-        - Se requiere examinar cuales sentimientos hay en un texto 
+- Herramientas Utilizadas:
+    - Backend:
+        - Nodejs
+        - Expressjs ( api rest )
+        - mocha (pruebas funcionales)
+        - eslint (para el estandard del código)
+    
+    - Frontend:
+        - Reactjs
+        - eslint
+        - router
+        - hooks
+
+- Herramientas de GOOGLE CLOUD
+    - Google Kubernetes Engine(GKE).
+    - Google App Engine.
+
+
+- APIS de GOOGLE CLOUD UTILIZADAS    
+    - @google-cloud/storage 
+    - @google-cloud/vision
+    - @google-cloud/speech
+    - @google-cloud/language
+
+- Suposiciones imagenes:
+    - Se requiere contabilizar la cantidad de personas que hay en una imagen
+    - Se requiere examinar si una imagen tiene contenido para adultos, violencia (entre otros) 
+    - Se requiere examinar cuales objectos hay en una imagen 
+- Suposiciones audio:
+    - Se requiere transcribir un audio
+    - Se requiere examinar las entidades que hay en un texto 
+    - Se requiere examinar cuales sentimientos hay en un texto 
 
 
 

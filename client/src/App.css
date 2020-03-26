@@ -141,6 +141,11 @@ h2{
   color: white;
   text-align: left;
 }
+.subtitle{
+  color: white;
+  text-align: left;
+  font-size: 12px;
+}
   input[type="file"] {
     width: 0.1px;
     height: 0.1px;

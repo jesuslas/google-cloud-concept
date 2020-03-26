@@ -31,7 +31,8 @@ function FormImage() {
       <Grid item xs={6}>
         <div className="container">
           <div className="title"> 1) Seleccionar Imagen</div>
-
+          <div className="subtitle">  - Solo admite formatos JPG, PNG, GIF</div>
+    
           <hr />
 
           <Grid container>
