@@ -29,6 +29,15 @@
                                   explicitContent["racy"]
                             }
 
+    - Suposiciones imagenes:
+        - Se requiere contabilizar la cantidad de personas que hay en una imagen
+        - Se requiere examinar si una imagen tiene contenido para adultos, violencia (entre otros) 
+        - Se requiere examinar cuales objectos hay en una imagen 
+    - Suposiciones audio:
+        - Se requiere transcribir un audio
+        - Se requiere examinar las entidades que hay en un texto 
+        - Se requiere examinar cuales sentimientos hay en un texto 
+
 
 
 ### install dependencies local
