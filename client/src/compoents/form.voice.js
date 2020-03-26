@@ -5,7 +5,6 @@ import { Grid } from "@material-ui/core";
 function FormImage() {
   const [file, setFile] = useState(undefined);
   const [result, setResult] = useState([]);
-  // const [currentDay, setCurrentDay] = useState([]);
   const clear = () => {
     setResult([]);
   };
@@ -14,7 +13,6 @@ function FormImage() {
     try {
       let _result = await getAudioInfo(file);
       _result = await _result.json();
-      console.log("result", _result);
       setResult(_result);
     } catch (error) {
       console.log("error", error);
