@@ -121,3 +121,9 @@ form button {
 .displayImage{
   max-width: 450px;
 }
+h2{
+  color:black
+}
+.dividerHeader{
+  border-bottom: 1px solid black;
+}

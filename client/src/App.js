@@ -7,6 +7,8 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <h2>Clasificador de Imágenes y Audio</h2>
+        <hr className="dividerHeader"/>
         <Router>
           <Switch>
             <TabsRouter />
