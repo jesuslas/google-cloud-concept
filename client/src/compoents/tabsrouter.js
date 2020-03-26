@@ -99,7 +99,7 @@ function TabsRouter(props) {
 
 const useStyles = makeStyles(() => ({
   root: {
-    backgroundColor: "#aad500",
+    backgroundColor: "#ffff",
     flexGrow: 1
   },
   shadowTabs: {

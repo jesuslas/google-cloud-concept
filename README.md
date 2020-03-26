@@ -17,16 +17,17 @@
             * transcription: texto transcrito del audio              
             * sentiment: Sentimiento global del text              
             * entities: entidades presentes en el texto   
-    - Endpoint /image POST req.files:{files:filepathtemp}    
-        - response: { objects, faces, detections: explicitContent }           
+
+    - Endpoint /image POST req.files: { files: filepathtemp }
+        - response: { objects, faces, detections: explicitContent }      
             * objects: son los objetos en la imagen            
             * feces: un arreglo con las caracteristicas de cada cada que aparece en la imagen            
             * explicitiContent: { 
                                 explicitContent["adult"],    
                                 explicitContent["medical"],
-                                  explicitContent["spoof"],
-                                  explicitContent["violence"],
-                                  explicitContent["racy"]
+                                explicitContent["spoof"],
+                                explicitContent["violence"],
+                                explicitContent["racy"]
                             }
 
     - Suposiciones imagenes:

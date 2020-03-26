@@ -18,7 +18,6 @@ function FormImage() {
     try {
       let _result = await getImageInfo(file);
       _result = await _result.json();
-      console.log("result", _result);
       setObjects(_result.objects);
       setFaces(_result.faces);
       setExplicitContent(_result.detections);
@@ -31,7 +30,7 @@ function FormImage() {
       <Grid item xs={3} />
       <Grid item xs={6}>
         <div className="container">
-          <div>Seleccionar Imagen</div>
+          <div className="title"> 1) Seleccionar Imagen</div>
 
           <hr />
 
@@ -47,6 +46,7 @@ function FormImage() {
             </Grid>
             <Grid item xs={12}>
               <input
+                id="inputFile"
                 type="file"
                 accept="image/*"
                 onChange={e => {
@@ -54,7 +54,11 @@ function FormImage() {
                   setFile(files);
                 }}
                 capture="camera"
+                className="input"
               />
+              <label htmlFor="inputFile">
+                {file ? file[0].name : "Selecciona Imagen"}
+              </label>
             </Grid>
             <Grid item xs={12}>
               <button type="submit" onClick={() => sendImage(file)}>
@@ -71,42 +75,56 @@ function FormImage() {
               </button>
             </Grid>
           </Grid>
-          <Grid container justify="center">
-            <Grid item xs={2} className="displayResults">
-              <ul>
-                {objects.map((item, i) => (
-                  <li key={i}>{item}</li>
-                ))}
-              </ul>
-            </Grid>
-            <Grid item xs={5} className="displayResults">
-              <ul>
-                {faces.map((item, i) => (
-                  <li key={i}>
+
+          <Grid item xs={12}>
+            {objects.length || faces.length ? (
+              <>
+                <div className="title"> 1) Análisis de Imagen</div>
+                <hr />
+                <Grid container justify="center">
+                  <Grid item xs={2} className="displayResults title">
                     <ul>
-                      <li>{item.faceNum}</li>
-                      <li>Probabilidad Alegría: {item.joyLikelihood}</li>
-                      <li>Probabilidad de ira: {item.angerLikelihood}</li>
-                      <li>Probabilidad de tristeza: {item.sorrowLikelihood}</li>
-                      <li>
-                        Probabilidad de sorpresa: {item.surpriseLikelihood}
-                      </li>
+                      {objects.map((item, i) => (
+                        <li key={i}>{item}</li>
+                      ))}
                     </ul>
-                  </li>
-                ))}
-              </ul>
-            </Grid>
-            <Grid item xs={5} className="displayResults">
-              {explicitContent.adult && (
-                <ul>
-                  <li>Adulto: {explicitContent.adult}</li>
-                  <li>Medica: {explicitContent.medical}</li>
-                  <li>Bromear: {explicitContent.spoof}</li>
-                  <li>Violencia: {explicitContent.violence}</li>
-                  <li>Atrevido: {explicitContent.racy}</li>
-                </ul>
-              )}
-            </Grid>
+                  </Grid>
+                  <Grid item xs={5} className="displayResults title">
+                    <ul>
+                      {faces.map((item, i) => (
+                        <li key={i}>
+                          <ul>
+                            <li>{item.faceNum}</li>
+                            <li>Probabilidad Alegría: {item.joyLikelihood}</li>
+                            <li>Probabilidad de ira: {item.angerLikelihood}</li>
+                            <li>
+                              Probabilidad de tristeza: {item.sorrowLikelihood}
+                            </li>
+                            <li>
+                              Probabilidad de sorpresa:{" "}
+                              {item.surpriseLikelihood}
+                            </li>
+                          </ul>
+                        </li>
+                      ))}
+                    </ul>
+                  </Grid>
+                  <Grid item xs={5} className="displayResults title">
+                    {explicitContent.adult && (
+                      <ul>
+                        <li>Adulto: {explicitContent.adult}</li>
+                        <li>Medica: {explicitContent.medical}</li>
+                        <li>Bromear: {explicitContent.spoof}</li>
+                        <li>Violencia: {explicitContent.violence}</li>
+                        <li>Atrevido: {explicitContent.racy}</li>
+                      </ul>
+                    )}
+                  </Grid>
+                </Grid>
+              </>
+            ) : (
+              "  "
+            )}
           </Grid>
         </div>
       </Grid>

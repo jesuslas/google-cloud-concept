@@ -5,17 +5,19 @@ import "./App.css";
 
 function App() {
   return (
-    <div className="App">
+    <>
       <header className="App-header">
         <h2>Clasificador de Imágenes y Audio</h2>
-        <hr className="dividerHeader"/>
+      </header>
+      <div className="App">
+        <div className="dividerHeader" />
         <Router>
           <Switch>
             <TabsRouter />
           </Switch>
         </Router>
-      </header>
-    </div>
+      </div>
+    </>
   );
 }
 
