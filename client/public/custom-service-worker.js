@@ -23,16 +23,12 @@ workbox.routing.registerRoute(
 // )
 
 workbox.routing.registerRoute(
-  new RegExp("https://api.openweathermap.org/"),
+  new RegExp("https://api.gcloud.jesusalpino.com/"),
   workbox.strategies.staleWhileRevalidate()
 );
 
-workbox.routing.registerRoute(
-  new RegExp("https://api.openweathermap.org/"),
-  workbox.strategies.cacheFirst()
-);
 
 workbox.routing.registerRoute(
-  new RegExp("https://weather.jesusalpino.com/"),
+  new RegExp("https://api.gcloud.jesusalpino.com/"),
   workbox.strategies.cacheFirst()
 );

@@ -41,29 +41,7 @@
   }
 }
 
-@media (max-width: 480px) {
 
-  .listMobile {
-    max-width: 414px;
-    overflow: scroll;
-  }
-  .labelMobile {
-    font-size: 14px !important;
-  }
-  .labelMobileAprox{
-    font-size: 9px !important;
-  }
-  
-  .tempMobile  {
-    font-size: 22px !important;
-  }
-  .tabButton {
-    width: 60px !important;
-  }
-  .MuiTab-root {
-    min-width: 65px !important;
-  }
-}
 
 .container {
   background: #2b3642;
@@ -171,4 +149,33 @@ h2{
       }
   .buttonActions{
     padding-bottom: 20px;
+  }
+  @media (max-width: 480px) {
+
+    .listMobile {
+      max-width: 414px;
+      overflow: scroll;
+    }
+    .labelMobile {
+      font-size: 14px !important;
+    }
+    .labelMobileAprox{
+      font-size: 9px !important;
+    }
+    
+    .tempMobile  {
+      font-size: 22px !important;
+    }
+    .tabButton {
+      width: 60px !important;
+    }
+    .MuiTab-root {
+      min-width: 65px !important;
+    }
+    .App-header {
+      font-size: calc(5px + 2vmin);
+    }
+    .displayImage{
+      max-width: 250px;
+    }
   }

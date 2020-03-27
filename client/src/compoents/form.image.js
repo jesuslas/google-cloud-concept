@@ -27,14 +27,12 @@ function FormImage() {
   };
   return (
     <Grid container justify="center">
-      <Grid item xs={3} />
-      <Grid item xs={6}>
+      <Grid item xs={1} md={3} xl={3}  />
+      <Grid item xs={10} md={6} xl={6} >
         <div className="container">
           <div className="title"> 1) Seleccionar Imagen</div>
           <div className="subtitle">  - Solo admite formatos JPG, PNG, GIF</div>
-    
           <hr />
-
           <Grid container>
             <Grid item xs={12} style={{ textAlign: "center" }}>
               {file && (
@@ -54,7 +52,6 @@ function FormImage() {
                   const files = Array.from(e.target.files);
                   setFile(files);
                 }}
-                capture="camera"
                 className="input"
               />
               <label htmlFor="inputFile">
@@ -83,14 +80,14 @@ function FormImage() {
                 <div className="title"> 1) Análisis de Imagen</div>
                 <hr />
                 <Grid container justify="center">
-                  <Grid item xs={2} className="displayResults title">
+                  <Grid item xs={12} md={2} xl={2} className="displayResults title">
                     <ul>
                       {objects.map((item, i) => (
                         <li key={i}>{item}</li>
                       ))}
                     </ul>
                   </Grid>
-                  <Grid item xs={5} className="displayResults title">
+                  <Grid item  xs={12} md={5} xl={5} className="displayResults title">
                     <ul>
                       {faces.map((item, i) => (
                         <li key={i}>
@@ -110,7 +107,7 @@ function FormImage() {
                       ))}
                     </ul>
                   </Grid>
-                  <Grid item xs={5} className="displayResults title">
+                  <Grid item xs={12} md={5} xl={5}  className="displayResults title">
                     {explicitContent.adult && (
                       <ul>
                         <li>Adulto: {explicitContent.adult}</li>
@@ -129,7 +126,7 @@ function FormImage() {
           </Grid>
         </div>
       </Grid>
-      <Grid item xs={3} />
+      <Grid item xs={1} md={3} xl={3} />
     </Grid>
   );
 }
