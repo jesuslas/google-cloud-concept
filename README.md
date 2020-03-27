@@ -126,6 +126,8 @@ kubectl create -f .\deployments\falabella-test-backend.yaml
 ### create deployment API kubectl file and implement cluster
 kubectl create -f .\deployments\falabella-test-service-api.yaml
 
+docker run --name elapi -e GOOGLE_APPLICATION_CREDENTIALS=/api/images/falabella-test-be7ccbe05e54.json -p 8000:8000 gcr.io/falabella-test-272122/api:v1
+
 ### show status
 kubectl get deployments
 kubectl get pods

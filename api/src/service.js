@@ -8,7 +8,6 @@ const fs = require("fs");
 
 module.exports.getDatos = async function getDatos() {
   return await fetch(`${apiBaseUrl}`);
-  // return datos;
 };
 
 module.exports.getBuckets = async function getBuckets() {
@@ -64,21 +63,16 @@ module.exports.getTextAnalyzeEntities = async function getTextAnalyzeEntities(
   return await client.analyzeEntities({ document });
 };
 
-module.exports.getAudioText = async function getAudioText(
-  data,
-  encod,
-  sampleRate,
-  channels
-) {
+module.exports.getAudioText = async function getAudioText(data) {
   const file = fs.readFileSync(data);
   const audioBytes = file.toString("base64");
   const audio = {
     content: audioBytes
   };
+  console.log("data", data);
   const config = {
-    encoding: encod,
-    sampleRateHertz: sampleRate,
-    audioChannelCount: channels,
+    encoding: "OGG_OPUS",
+    sampleRateHertz: "16000",
     languageCode: "es"
   };
   const request = {

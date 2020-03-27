@@ -31,7 +31,7 @@ function FormImage() {
           <div className="title"> 1) Seleccionar Audio</div>
           <div className="subtitle">
             {" "}
-            - Solo admite formatos OPUS, MP3, WAV maxima duración 1min
+            - Solo admite formatos OPUS maxima duración 1min
           </div>
           <hr />
           <Grid container>
@@ -46,7 +46,7 @@ function FormImage() {
                 }}
               />
               <label htmlFor="inputFile">
-                {file ? file[0].name : "Subir Archivo"}
+                {file && file[0] ? file[0].name : "Subir Archivo"}
               </label>
             </Grid>
             <Grid item xs={12} className="buttonActions">
@@ -56,6 +56,7 @@ function FormImage() {
               <button onClick={() => clear()}>Borar</button>
             </Grid>
             <Grid item xs={12}>
+              <div className="title"> {result.error && result.error}</div>
               {!result.details && result.transcription ? (
                 <>
                   <Grid item xs={12} className="text">

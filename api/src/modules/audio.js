@@ -4,51 +4,23 @@ const {
   getTextSentiment,
   getTextAnalyzeEntities
 } = require("../service");
-const path = require("path");
-const child_process = require("child_process");
-const exec = child_process.exec;
-let CHANELS = 2;
-let SAMPLERATE = 8000;
-var ffmpeg = require("ffmpeg");
+const fs = require("fs");
 
 function getExtension(filename) {
   var ext = (filename || "").split(".");
   return ext[ext.length - 1];
 }
 const encoding = { opus: "OGG_OPUS", flac: "FLAC" };
-
-const tranforEncodToFlac = file => {
-  exec(
-    `ffmpeg -i ${file} ${path.join(
-      path.dirname(__dirname),
-      "temp/",
-      "output.flac"
-    )}`
-  );
-};
 class Image {
   async getAudioInfo(file, filename) {
+    const original = `${file}`;
     try {
       let ext = getExtension(filename);
       if (ext !== "opus") {
-        if (ext === "mp3" || ext === "wav") {
-          tranforEncodToFlac(file);
-          file = path.join(path.dirname(__dirname), "temp/", "output.flac");
-          ext = "flac";
-        }
+        return { error: "formato no disponible" };
       }
-      new ffmpeg(file, function(err, _file) {
-        SAMPLERATE = _file.metadata.audio.sample_rate;
-        CHANELS = _file.metadata.audio.channels.value;
-      });
-
       await getBuckets();
-      const [response] = await getAudioText(
-        file,
-        encoding[ext] || "OGG_OPUS",
-        SAMPLERATE,
-        CHANELS
-      );
+      const [response] = await getAudioText(file);
       const transcription = response.results
         .map(result => result.alternatives[0].transcript)
         .join("\n");
@@ -56,9 +28,10 @@ class Image {
       const [result] = await getTextSentiment(transcription);
       const entities = analyzeEntities.entities;
       const sentiment = result.documentSentiment;
+      await fs.unlink(original, erro => console.log);
       return { transcription, entities, sentiment };
     } catch (error) {
-      console.log("error", error);
+      console.log("error22", error);
       throw error;
     }
   }
