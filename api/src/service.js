@@ -64,15 +64,21 @@ module.exports.getTextAnalyzeEntities = async function getTextAnalyzeEntities(
   return await client.analyzeEntities({ document });
 };
 
-module.exports.getAudioText = async function getAudioText(data) {
+module.exports.getAudioText = async function getAudioText(
+  data,
+  encod,
+  sampleRate,
+  channels
+) {
   const file = fs.readFileSync(data);
   const audioBytes = file.toString("base64");
   const audio = {
     content: audioBytes
   };
   const config = {
-    encoding: "OGG_OPUS",
-    sampleRateHertz: 16000,
+    encoding: encod,
+    sampleRateHertz: sampleRate,
+    audioChannelCount: channels,
     languageCode: "es"
   };
   const request = {

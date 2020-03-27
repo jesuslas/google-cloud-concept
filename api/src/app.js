@@ -10,6 +10,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(
   fileupload({
     useTempFiles: true,
+    safeFileNames: true,
+    preserveExtension: 10,
     tempFileDir: path.join(__dirname, "temp")
   })
 );
@@ -34,11 +36,11 @@ router.use((req, res, next) => {
   );
   next();
 });
-router.post("/image", ({ files: { files: { tempFilePath } } }, res) =>
-  response(res)(() => image.getImageInfo(tempFilePath))
+router.post("/image", ({ files: { files: { tempFilePath, name } } }, res) =>
+  response(res)(() => image.getImageInfo(tempFilePath, name))
 );
-router.post("/audio", ({ files: { files: { tempFilePath } } }, res) =>
-  response(res)(() => audio.getAudioInfo(tempFilePath))
+router.post("/audio", ({ files: { files: { tempFilePath, name } } }, res) =>
+  response(res)(() => audio.getAudioInfo(tempFilePath, name))
 );
 router.get("/*", (_, res) => res.send("it works"));
 app.use("/", router);

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { getAudioInfo } from "../services/service.apiAudio";
-import { Grid,CircularProgress } from "@material-ui/core";
+import { Grid, CircularProgress } from "@material-ui/core";
 
 function FormImage() {
   const [file, setFile] = useState(undefined);
@@ -29,7 +29,10 @@ function FormImage() {
       <Grid item xs={10} md={6} xl={6}>
         <div className="container">
           <div className="title"> 1) Seleccionar Audio</div>
-          <div className="subtitle">  - Solo admite formatos OPUS (notas de voz)</div>
+          <div className="subtitle">
+            {" "}
+            - Solo admite formatos OPUS, MP3, WAV maxima duración 1min
+          </div>
           <hr />
           <Grid container>
             <Grid item xs={12}>
@@ -52,14 +55,13 @@ function FormImage() {
               </button>
               <button onClick={() => clear()}>Borar</button>
             </Grid>
-            <Grid item xs={12} >
-              {!result.details &&
-                  result.transcription ? (
-                    <>
+            <Grid item xs={12}>
+              {!result.details && result.transcription ? (
+                <>
                   <Grid item xs={12} className="text">
-                      <div className="title"> 2) Transcripción de Audio</div>
-                      <hr />
-                      {result.transcription}
+                    <div className="title"> 2) Transcripción de Audio</div>
+                    <hr />
+                    {result.transcription}
                   </Grid>
                   <Grid item xs={12} className="text">
                     {!result.details &&
@@ -72,12 +74,15 @@ function FormImage() {
                               {!result.details &&
                                 result.sentiment && (
                                   <>
-                                  <div className="title"> - Sentimiento escore -1 al 1</div>
+                                    <div className="title">
+                                      {" "}
+                                      - Sentimiento escore -1 al 1
+                                    </div>
                                     <p>{result.sentiment.score}</p>
                                   </>
                                 )}
                             </Grid>
-                            <Grid item  xs={12} md={6} xl={6} className="text">
+                            <Grid item xs={12} md={6} xl={6} className="text">
                               {!result.details &&
                                 result.entities && (
                                   <>
@@ -94,10 +99,11 @@ function FormImage() {
                         </>
                       )}
                   </Grid>
-                  </>
-                ): loading && <CircularProgress color="secondary" />}
+                </>
+              ) : (
+                loading && <CircularProgress color="secondary" />
+              )}
             </Grid>
-             
           </Grid>
         </div>
       </Grid>

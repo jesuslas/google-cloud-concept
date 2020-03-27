@@ -9,6 +9,9 @@ RUN npm ci
 COPY . /api/
 
 RUN npm ci
+RUN apt update
+RUN apt install ffmpeg -y
+RUN ffmpeg -version 
 
 EXPOSE 4000
 
