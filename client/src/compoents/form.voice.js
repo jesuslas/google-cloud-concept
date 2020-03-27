@@ -78,7 +78,6 @@ function FormImage() {
                         {!result.details &&
                           result.entities && (
                             <>
-                              - Entidades
                               <div className="title"> - Entidades</div>
                               <ul>
                                 {result.entities.map((ent, i) => (

@@ -79,8 +79,9 @@ function FormImage() {
               <>
                 <div className="title"> 1) Análisis de Imagen</div>
                 <hr />
-                <Grid container justify="center">
+                <Grid container justify="center" spacing={1}>
                   <Grid item xs={12} md={2} xl={2} className="displayResults title">
+                  <div className="title"> - Obj. en la imagen</div>
                     <ul>
                       {objects.map((item, i) => (
                         <li key={i}>{item}</li>
@@ -88,6 +89,7 @@ function FormImage() {
                     </ul>
                   </Grid>
                   <Grid item  xs={12} md={5} xl={5} className="displayResults title">
+                  <div className="title"> - Sentimientos en caras de la imagen</div>
                     <ul>
                       {faces.map((item, i) => (
                         <li key={i}>
@@ -108,6 +110,7 @@ function FormImage() {
                     </ul>
                   </Grid>
                   <Grid item xs={12} md={5} xl={5}  className="displayResults title">
+                  <div className="title"> - Analisis de contenido en la imagen</div>
                     {explicitContent.adult && (
                       <ul>
                         <li>Adulto: {explicitContent.adult}</li>
