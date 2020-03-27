@@ -1,21 +1,26 @@
 import React, { useState } from "react";
 import { getAudioInfo } from "../services/service.apiAudio";
-import { Grid } from "@material-ui/core";
+import { Grid,CircularProgress } from "@material-ui/core";
 
 function FormImage() {
   const [file, setFile] = useState(undefined);
   const [result, setResult] = useState([]);
+  const [loading, setLoading] = useState(false);
+
   const clear = () => {
     setResult([]);
   };
   const sendImage = async file => {
     clear();
+    setLoading(true);
     try {
       let _result = await getAudioInfo(file);
       _result = await _result.json();
       setResult(_result);
+      setLoading(false);
     } catch (error) {
       console.log("error", error);
+      setLoading(false);
     }
   };
   return (
@@ -47,50 +52,52 @@ function FormImage() {
               </button>
               <button onClick={() => clear()}>Borar</button>
             </Grid>
-            <Grid item xs={12} className="text">
-              {result.details && result.details}
+            <Grid item xs={12} >
               {!result.details &&
-                result.transcription && (
-                  <>
-                    <div className="title"> 2) Transcripción de Audio</div>
-                    <hr />
-                    {result.transcription}
+                  result.transcription ? (
+                    <>
+                  <Grid item xs={12} className="text">
+                      <div className="title"> 2) Transcripción de Audio</div>
+                      <hr />
+                      {result.transcription}
+                  </Grid>
+                  <Grid item xs={12} className="text">
+                    {!result.details &&
+                      result.sentiment && (
+                        <>
+                          <div className="title"> 3) Análisis del Texto</div>
+                          <hr />
+                          <Grid container>
+                            <Grid item xs={12} md={6} xl={6}>
+                              {!result.details &&
+                                result.sentiment && (
+                                  <>
+                                  <div className="title"> - Sentimiento escore -1 al 1</div>
+                                    <p>{result.sentiment.score}</p>
+                                  </>
+                                )}
+                            </Grid>
+                            <Grid item  xs={12} md={6} xl={6} className="text">
+                              {!result.details &&
+                                result.entities && (
+                                  <>
+                                    <div className="title"> - Entidades</div>
+                                    <ul>
+                                      {result.entities.map((ent, i) => (
+                                        <li key={i}>{ent.name}</li>
+                                      ))}
+                                    </ul>
+                                  </>
+                                )}
+                            </Grid>
+                          </Grid>
+                        </>
+                      )}
+                  </Grid>
                   </>
-                )}
+                ): loading && <CircularProgress color="secondary" />}
             </Grid>
-            <Grid item xs={12} className="text">
-              {!result.details &&
-                result.sentiment && (
-                  <>
-                    <div className="title"> 3) Análisis del Texto</div>
-                    <hr />
-                    <Grid container>
-                      <Grid item xs={12} md={6} xl={6}>
-                        {!result.details &&
-                          result.sentiment && (
-                            <>
-                             <div className="title"> - Sentimiento escore -1 al 1</div>
-                              <p>{result.sentiment.score}</p>
-                            </>
-                          )}
-                      </Grid>
-                      <Grid item  xs={12} md={6} xl={6} className="text">
-                        {!result.details &&
-                          result.entities && (
-                            <>
-                              <div className="title"> - Entidades</div>
-                              <ul>
-                                {result.entities.map((ent, i) => (
-                                  <li key={i}>{ent.name}</li>
-                                ))}
-                              </ul>
-                            </>
-                          )}
-                      </Grid>
-                    </Grid>
-                  </>
-                )}
-            </Grid>
+             
           </Grid>
         </div>
       </Grid>

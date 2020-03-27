@@ -110,24 +110,19 @@ gcloud auth configure-docker
 
 ### build docker images CLEINTE
 docker build -t gcr.io/falabella-test-272122/client:v1 .\client\
-### build docker images API
-docker build -t gcr.io/falabella-test-272122/api:v1 .\api\
-
 ### push images CLIENT in google container registry
 gcloud docker -- push gcr.io/falabella-test-272122/client:v1
-
-### push images API in google container registry
-gcloud docker -- push gcr.io/falabella-test-272122/api:v1
-
 ### create deployment CLIENT kubectl file and implement cluster
 kubectl create -f .\deployments\falabella-test-frontend.yml
-
-### create deployment API kubectl file and implement cluster
-kubectl create -f .\deployments\falabella-test-backend.yaml
-
 ### create deployment API kubectl file and implement cluster
 kubectl create -f .\deployments\falabella-test-service-client.yaml
 
+### build docker images API
+docker build -t gcr.io/falabella-test-272122/api:v1 .\api\
+### push images API in google container registry
+gcloud docker -- push gcr.io/falabella-test-272122/api:v1
+### create deployment API kubectl file and implement cluster
+kubectl create -f .\deployments\falabella-test-backend.yaml
 ### create deployment API kubectl file and implement cluster
 kubectl create -f .\deployments\falabella-test-service-api.yaml
 

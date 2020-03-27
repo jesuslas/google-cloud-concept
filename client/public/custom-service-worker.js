@@ -23,12 +23,12 @@ workbox.routing.registerRoute(
 // )
 
 workbox.routing.registerRoute(
-  new RegExp("https://api.gcloud.jesusalpino.com/"),
+  new RegExp("http://api.gcloud.jesusalpino.com"),
   workbox.strategies.staleWhileRevalidate()
 );
 
 
 workbox.routing.registerRoute(
-  new RegExp("https://api.gcloud.jesusalpino.com/"),
+  new RegExp("http://api.gcloud.jesusalpino.com"),
   workbox.strategies.cacheFirst()
 );

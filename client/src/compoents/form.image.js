@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { getImageInfo } from "../services/service.apiImage";
-import { Grid } from "@material-ui/core";
+import { Grid,CircularProgress } from "@material-ui/core";
 
 function FormImage() {
   const [file, setFile] = useState(undefined);
   const [objects, setObjects] = useState([]);
   const [faces, setFaces] = useState([]);
   const [explicitContent, setExplicitContent] = useState({});
+  const [loading, setLoading] = useState(false);
   // const [currentDay, setCurrentDay] = useState([]);
   const clear = () => {
     setObjects([]);
@@ -15,14 +16,17 @@ function FormImage() {
   };
   const sendImage = async file => {
     clear();
+    setLoading(true);
     try {
       let _result = await getImageInfo(file);
       _result = await _result.json();
       setObjects(_result.objects);
       setFaces(_result.faces);
       setExplicitContent(_result.detections);
+      setLoading(false);
     } catch (error) {
       console.log("error", error);
+      setLoading(false);
     }
   };
   return (
@@ -123,9 +127,7 @@ function FormImage() {
                   </Grid>
                 </Grid>
               </>
-            ) : (
-              "  "
-            )}
+            ) : loading && <CircularProgress color="secondary" />}
           </Grid>
         </div>
       </Grid>
