@@ -1,0 +1,35 @@
+{
+  "name": "gcloud-stack",
+  "version": "1.0.0",
+  "description": "- Se carga una imagen, la envia al api y este retorna la información de la imagen. \r - Se carga un audio, la envia al api y este retorna la información del audio.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:client":"docker build -t gcr.io/falabella-test-272122/client:v1 .\\client\\",
+    "build:api":" docker build -t gcr.io/falabella-test-272122/api:v1 .\\api\\",
+    "build:iamges":"npm run build:client && npm run build:api",
+    "push:client":" gcloud docker -- push gcr.io/falabella-test-272122/client:v1",
+    "push:api":"gcloud docker -- push gcr.io/falabella-test-272122/api:v1",
+    "build:images":"npm run build:client && npm run build:api",
+    "push:images":"npm run push:client && npm run push:api",
+    "delete:deployments:api":"kubectl delete deployments falabella-test-api",
+    "delete:deployments:client":"kubectl delete deployments falabella-test-client",
+    "delete:deployments":"npm run delete:deployments:api && npm run delete:deployments:client",
+    "create:deployments:api":"kubectl create -f .\\deployments\\falabella-test-backend.yaml",
+    "create:deployments:client":"kubectl create -f .\\deployments\\falabella-test-frontend.yml",
+    "create:deployments":"npm run create:deployments:api && npm run create:deployments:client",
+    "k:deploy":"npm run build:iamges && npm run push:images && npm run create:deployments && kubectl get deployments",
+    "k:redeploy":"npm run build:iamges && npm run push:images && npm run delete:deployments && npm run create:deployments && kubectl get deployments"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jesuslas/falabella-test.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jesuslas/falabella-test/issues"
+  },
+  "homepage": "https://github.com/jesuslas/falabella-test#readme"
+}

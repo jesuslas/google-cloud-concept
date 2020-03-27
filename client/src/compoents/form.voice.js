@@ -31,7 +31,8 @@ function FormImage() {
           <div className="title"> 1) Seleccionar Audio</div>
           <div className="subtitle">
             {" "}
-            - Solo admite formatos OPUS maxima duración 1min
+            - Solo admite formatos de audio (OPUS, MP3, FLAC, WAV) maxima
+            duración 15m
           </div>
           <hr />
           <Grid container>

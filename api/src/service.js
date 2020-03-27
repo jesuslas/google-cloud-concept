@@ -1,10 +1,12 @@
-const { apiBaseUrl } = require("../config");
+const { apiBaseUrl, bucketName } = require("../config");
 const fetch = require("node-fetch");
 const { Storage } = require("@google-cloud/storage");
 const vision = require("@google-cloud/vision");
 const speech = require("@google-cloud/speech");
 const language = require("@google-cloud/language");
 const fs = require("fs");
+const path = require("path");
+const storage = new Storage();
 
 module.exports.getDatos = async function getDatos() {
   return await fetch(`${apiBaseUrl}`);
@@ -14,7 +16,6 @@ module.exports.getBuckets = async function getBuckets() {
   // Instantiates a client. If you don't specify credentials when constructing
   // the client, the client library will look for credentials in the
   // environment.
-  const storage = new Storage();
 
   try {
     // Makes an authenticated API request.
@@ -27,6 +28,33 @@ module.exports.getBuckets = async function getBuckets() {
     console.error("ERROR:", err);
   }
 };
+
+module.exports.deleteFIleToBucket = async function deleteFIleToBucket(file) {
+  try {
+    const bucket = storage.bucket(bucketName);
+    const fileName = path.basename(file);
+    const fileBucket = bucket.file(`uploads/${fileName}`);
+    await fileBucket.delete();
+  } catch (error) {
+    throw error;
+  }
+};
+module.exports.uploadFIleToBucket = async function uploadFIleToBucket(
+  file,
+  options
+) {
+  options = options || {};
+  const bucket = storage.bucket(bucketName);
+  const fileName = path.basename(file);
+  const fileBucket = bucket.file(`uploads/${fileName}`);
+
+  return bucket
+    .upload(file, { ...options, destination: `uploads/${fileName}` })
+    .then(() => fileBucket.makePublic())
+    .then(() => exports.getBucketPublicUrl(bucketName, fileName));
+};
+exports.getBucketPublicUrl = (bucketName, fileName) =>
+  `gs://${bucketName}/uploads/${fileName}`;
 
 module.exports.getImageObjects = async function getImageObjects(data) {
   const client = new vision.ImageAnnotatorClient();
@@ -64,15 +92,24 @@ module.exports.getTextAnalyzeEntities = async function getTextAnalyzeEntities(
 };
 
 module.exports.getAudioText = async function getAudioText(data) {
-  const file = fs.readFileSync(data);
-  const audioBytes = file.toString("base64");
-  const audio = {
-    content: audioBytes
-  };
-  console.log("data", data);
+  let eject = "longRunningRecognize";
+  let audio = {};
+  if (!data.includes("gs://")) {
+    const file = fs.readFileSync(data);
+    data = file.toString("base64");
+    eject = "recognize";
+    audio = {
+      content: data
+    };
+  } else {
+    audio = {
+      uri: data
+    };
+  }
+
   const config = {
-    encoding: "OGG_OPUS",
-    sampleRateHertz: "16000",
+    encoding: "FLAC",
+    sampleRateHertz: 48000,
     languageCode: "es"
   };
   const request = {
@@ -80,5 +117,5 @@ module.exports.getAudioText = async function getAudioText(data) {
     config: config
   };
   const client = new speech.SpeechClient();
-  return await client.recognize(request);
+  return await client[eject](request);
 };

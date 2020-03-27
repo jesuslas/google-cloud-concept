@@ -2,3 +2,5 @@ api/codealike.json
 api/src/temp/
 api/images/
 codealike.json
+api/dockerfiles/
+client/dockerfiles/dockerfile
